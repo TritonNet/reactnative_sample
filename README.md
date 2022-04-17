@@ -1,2 +1,2 @@
-# reactnative_sample
-React Native Sample
+# React Native Sample
+A collection of sample React Native Projects 
