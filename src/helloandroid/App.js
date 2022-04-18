@@ -1,35 +1,52 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, Button } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { render } from "react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod";
 
 const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
+  const [text, onChangeText] = React.useState("Email address");
   const [number, onChangeNumber] = React.useState(null);
 
   return (
-    <SafeAreaView>
-      <TextInput
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
-      />
-      <Button 
-        title="Verify"
-        style={styles.button}></Button>      
-    </SafeAreaView>
+    <View style={styles.container}>
+      <View style={styles.title_view}>
+        <Text style={styles.text}>ABC Company</Text>
+      </View>
+      <View style={styles.button_view}>
+        <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+          />
+        <Button 
+          title="Verify"></Button>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+  container: {
+    flex: 1,
   },
-  button:{
-    height: 25,
-    width: 50,
-    padding: 10
+  text: {
+    fontSize: 50,
+    margin: 50,
+    textAlign: "center"
+  },
+  title_view: {
+    alignItems: "center",
+  },
+  input: {
+    borderWidth: 1,
+    height: 40,
+    marginBottom: 25
+  },  
+  button_view: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 36,
+    margin: 25
   }
 });
 
