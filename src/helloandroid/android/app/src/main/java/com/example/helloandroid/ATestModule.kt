@@ -1,5 +1,6 @@
 package com.example.helloandroid
 
+import android.util.Log
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContext
@@ -10,6 +11,11 @@ class ATestModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 {
     override fun getName(): String {
         return "ATestModule"
+    }
+
+    @ReactMethod
+    fun createTestEvent(name: String, location: String) {
+        Log.d("ATestModule", "Create test event called with name: $name and location: $location")
     }
 
 }
