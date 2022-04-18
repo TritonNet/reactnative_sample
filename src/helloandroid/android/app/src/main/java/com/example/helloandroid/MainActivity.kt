@@ -1,7 +1,6 @@
 package com.example.helloandroid
 
 import android.os.Bundle
-import com.facebook.react.BuildConfig
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactRootView
@@ -24,6 +23,9 @@ class MainActivity : ReactActivity() {
         return MainActivityDelegate(this, mainComponentName)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(null)
+    }
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
