@@ -1,17 +1,9 @@
-import * as React from 'react';
-import { Button, View, Text, TextInput, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from "react";
+import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { render } from "react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod";
 
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
-function HomeScreen({ navigation }) {
+const UselessTextInput = () => {
   const [text, onChangeText] = React.useState("Email address");
   const [number, onChangeNumber] = React.useState(null);
 
@@ -27,23 +19,9 @@ function HomeScreen({ navigation }) {
             value={text}
           />
         <Button 
-          title="Verify"
-          onPress={() => navigation.navigate('Details')}></Button>
+          title="Verify"></Button>
       </View>
     </View>
-  );
-}
-
-const Stack = createNativeStackNavigator();
-
-const UselessTextInput = ({ navigation }) => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 
