@@ -24,6 +24,7 @@ class MainApplication : Application(), ReactApplication
 
 
             return Arrays.asList<ReactPackage>(
+                MyAppPackage(),
                 MainReactPackage(),
                 RNScreensPackage(),
                 SafeAreaContextPackage()

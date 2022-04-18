@@ -1,7 +1,16 @@
-import * as React from 'react';
-import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import React, { useEffect, useRef } from 'react';
+import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { AReactIdentityViewManager } from './AReactIdentityViewManager';
+
+const createFragment = (viewId) =>
+  UIManager.dispatchViewManagerCommand(
+    viewId,
+    // we are calling the 'create' command
+    UIManager.AReactIdentityViewManager.Commands.create.toString(),
+    [viewId]
+  );
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
@@ -19,10 +28,18 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 const VerifyScreen = ({ navigation, route }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const viewId = findNodeHandle(ref.current);
+    createFragment(viewId);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <View style={styles.title_view}>
+      <View style={styles.title_view}>        
         <Text style={styles.subtitle}>Verify your identity</Text>
+        <AReactIdentityViewManager style={styles.identityView} ref={ref}/>
       </View>
     </View>
   );
@@ -41,9 +58,15 @@ const App = () => {
   );
 };
 
+const dimentions = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  identityView:{
+    height: dimentions.height,
+    width: dimentions.width
   },
   title: {
     fontSize: 50,
