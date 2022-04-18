@@ -1,6 +1,7 @@
 package com.example.helloandroid
 
 import android.os.Bundle
+import com.facebook.react.BuildConfig
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.ReactRootView
@@ -12,7 +13,7 @@ class MainActivity : ReactActivity() {
      * rendering of the component.
      */
     override fun getMainComponentName(): String? {
-        return "test_one"
+        return "helloandroid"
     }
 
     /**
@@ -23,17 +24,18 @@ class MainActivity : ReactActivity() {
         return MainActivityDelegate(this, mainComponentName)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
+//    }
 
     class MainActivityDelegate(activity: ReactActivity?, mainComponentName: String?) :
         ReactActivityDelegate(activity, mainComponentName) {
         override fun createRootView(): ReactRootView {
             val reactRootView = ReactRootView(context)
             // If you opted-in for the New Architecture, we enable the Fabric Renderer.
-            reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED)
+            //reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED)
+            reactRootView.setIsFabric(false)
             return reactRootView
         }
     }
