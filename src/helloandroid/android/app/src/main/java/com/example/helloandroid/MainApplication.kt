@@ -3,6 +3,7 @@ package com.example.helloandroid
 import android.app.Application
 import com.facebook.react.*
 import com.facebook.react.shell.MainReactPackage
+import com.swmansion.reanimated.ReanimatedPackage
 import com.swmansion.rnscreens.RNScreensPackage
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage
 import java.util.*
@@ -25,6 +26,7 @@ class MainApplication : Application(), ReactApplication
 
             return Arrays.asList<ReactPackage>(
                 MyAppPackage(),
+                ReanimatedPackage(),
                 MainReactPackage(),
                 RNScreensPackage(),
                 SafeAreaContextPackage()

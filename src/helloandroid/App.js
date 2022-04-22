@@ -2,15 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AReactIdentityViewManager } from './AReactIdentityViewManager';
-
-const createFragment = (viewId) =>
-  UIManager.dispatchViewManagerCommand(
-    viewId,
-    // we are calling the 'create' command
-    UIManager.AReactIdentityViewManager.Commands.create.toString(),
-    [viewId]
-  );
+import { RNIdentityViewManager } from './AReactIdentityViewManager';
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
@@ -28,21 +20,20 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 const VerifyScreen = ({ navigation, route }) => {
-  const ref = useRef(null);
+    const ref = useRef(null);
 
-  useEffect(() => {
-    const viewId = findNodeHandle(ref.current);
-    createFragment(viewId);
-  }, []);
+    useEffect(() => {
+        ref.current.initialize();
+    }, []);
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.title_view}>        
-        <Text style={styles.subtitle}>Verify your identity</Text>
-        <AReactIdentityViewManager style={styles.identityView} ref={ref}/>
-      </View>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <View style={styles.title_view}>        
+                <Text style={styles.subtitle}>Verify your identity</Text>
+                <RNIdentityViewManager ref={ref} />
+            </View>
+        </View>
+    );
 };
 
 const Stack = createNativeStackNavigator();
