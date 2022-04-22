@@ -14,11 +14,13 @@ import java.util.*
 
 class MyAppPackage : ReactPackage
 {
+    override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {
+        return mutableListOf()
+    }
+
     override fun createViewManagers(reactContext: ReactApplicationContext): MutableList<ViewManager<out View, out ReactShadowNode<*>>> {
         return mutableListOf(
             AReactIdentityViewManager()
         )
     }
-
-    override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> = listOf(ATestModule(reactContext)).toMutableList()
 }
