@@ -19,19 +19,18 @@ const LoginScreen = ({ navigation }) => {
     </View>
   );
 };
-const VerifyScreen = ({ navigation, route }) => {
-    const ref = useRef(null);
-    biometricProvider: IRNBiometricProvider;
+const VerifyScreen = ({ navigation, route }) =>
+{
+    var biometricProvider: IRNBiometricProvider;
 
     const config: IBiometricProviderConfig = {
         License: "License String",
         ICAOParams: undefined,
         StatusUpdateCallback: undefined
-        /* Other configuration parameters */
     };
     
     useEffect(() => {
-        //biometricProvider.initialize(config);
+        this.biometricProvider.initialize(config);
     }, []);
 
     return (
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
   },
   identityView:{
     height: dimentions.height,
-    width: dimentions.width
+    width: dimentions.width - 50
   },
   title: {
     fontSize: 50,
