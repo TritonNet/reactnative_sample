@@ -1,15 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import * as React from 'react';
 import { requireNativeComponent, StyleSheet, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { interpolate } from 'react-native-reanimated';
 
 const AReactIdentityViewManager = requireNativeComponent('AReactIdentityViewManager');
 
-const ref = useRef(null);
+export interface IRNBiometricProvider
+{
+    initialize(config: IBiometricProviderConfig)
+}
+
+export interface IRNBiometricProviderProps
+{
+    style: StyleSheet
+}
+
+export interface IRNBiometricProviderState
+{ }
 
 export interface ICAOConfigurationParams
-{
-
-}
+{  }
 
 export interface IBiometricPreviewStatusSink
 {
@@ -23,33 +32,26 @@ export interface IBiometricProviderConfig
     StatusUpdateCallback: IBiometricPreviewStatusSink
 }
 
-export class RNIdentityViewManager extends React.Component
+export class RNBiometricProvider extends React.Component//<IRNBiometricProviderProps, IRNBiometricProviderState> //implements IRNBiometricProvider
 {
-    constructor(props) {
+    ProviderView: any
+    props: IRNBiometricProviderProps;
+
+    constructor(props: IRNBiometricProviderProps)
+    {   
         super(props);
-    }
-
-    COMMANDS = UIManager.getViewManagerConfig('AReactIdentityViewManager').Commands
-
-    createUIFragment(viewId)
-    {
-        UIManager.dispatchViewManagerCommand(
-            viewId,
-            this.COMMANDS.create.toString(),
-            [viewId]
-        );
+        this.props = props
     }
 
     initialize(config: IBiometricProviderConfig)
     {
         console.log("IBiometricProviderConfig::License = " + config.License)
-
-        const viewId = findNodeHandle(this);
-        this.createUIFragment(viewId);
+        
+        const viewId = findNodeHandle(this.ProviderView);
 
         UIManager.dispatchViewManagerCommand(
             viewId,
-            this.COMMANDS.update.toString(),
+            "update",
             [viewId]
         );
     }
@@ -57,7 +59,9 @@ export class RNIdentityViewManager extends React.Component
     render() 
     {
         return (
-            <AReactIdentityViewManager style={this.props.style} ref={ref}/>
+            <AReactIdentityViewManager style={this.props.style} ref={(component) => {
+                this.ProviderView = component;
+            }}/>
         );
     }
 };

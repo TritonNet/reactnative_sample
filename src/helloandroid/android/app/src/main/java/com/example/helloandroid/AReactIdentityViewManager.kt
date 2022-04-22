@@ -1,127 +1,58 @@
 package com.example.helloandroid
 
 import android.util.Log
-import android.view.Choreographer
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
-import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.common.MapBuilder
-import com.facebook.react.uimanager.IllegalViewOperationException
+import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactPropGroup
 
 
-class AReactIdentityViewManager constructor(): ViewGroupManager<FrameLayout>() {
+class AReactIdentityViewManager constructor(): SimpleViewManager<CustomView>() {
     val REACT_CLASS = "AReactIdentityViewManager"
     val TAG = "IdentityViewManager"
-    val COMMAND_CREATE = 1
-    val COMMAND_UPDATE = 8
 
-    lateinit var m_reactContext: ReactApplicationContext
-    private var propWidth = 0
-    private var propHeight = 0
+    private var m_width = 0
+    private var m_height = 0
 
-    lateinit var m_fragment:ATestFragment
+    lateinit var m_view: CustomView
 
-    constructor(reactContext: ReactApplicationContext) : this() {
-        m_reactContext = reactContext
+    override fun createViewInstance( context: ThemedReactContext): CustomView
+    {
+        Log.d(TAG, "createViewInstance")
+
+        m_view = CustomView(context)
+        m_view.measure(
+            View.MeasureSpec.makeMeasureSpec(m_width, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(m_height, View.MeasureSpec.EXACTLY)
+        )
+        m_view.layout(0, 0, m_width, m_height)
+
+        return m_view;
     }
 
     override fun getName(): String {
+        Log.d(TAG, "getName")
         return REACT_CLASS;
     }
 
-    @ReactMethod
-    fun updateText() {
-        m_fragment.UpdateText()
-    }
-
-    /**
-     * Return a FrameLayout which will later hold the Fragment
-     */
-    override fun createViewInstance(reactContext: ThemedReactContext): FrameLayout {
-        return CustomView(reactContext)
-    }
-
-    /**
-     * Map the "create" command to an integer
-     */
-    @Nullable
-    override fun getCommandsMap(): Map<String?, Int?>? {
-        Log.d(TAG, "getCommandsMap()")
-
-        return MapBuilder.of(
-            "create", COMMAND_CREATE,
-            "update", COMMAND_UPDATE
-        )
-    }
-
-    fun receiveCommand(@NonNull root: FrameLayout?, commandId: String, args: ReadableArray?)
+    override fun receiveCommand(view: CustomView, commandId: String, args: ReadableArray?)
     {
-        Log.d(TAG, "receiveCommand $commandId")
-
-        super.receiveCommand(root!!, commandId, args)
-        val reactNativeViewId = args!!.getInt(0)
-        when (commandId.toInt()) {
-            COMMAND_CREATE -> createFragment(root, reactNativeViewId)
-            COMMAND_UPDATE -> m_fragment.UpdateText()
-            else -> {}
+        Log.d(TAG, "receiveCommand")
+        when (commandId) {
+            "update" -> m_view.UpdateText()
         }
     }
 
     @ReactPropGroup(names = ["width", "height"], customType = "Style")
-    fun setStyle(view: FrameLayout?, index: Int, value: Int) {
-        if (index == 0) {
-            propWidth = value
-        }
-        if (index == 1) {
-            propHeight = value
-        }
+    fun setStyle(view: FrameLayout?, index: Int, value: Int)
+    {
+        Log.d(TAG, "setStyle")
+        if (index == 0)
+            m_width = value
+        else if (index == 1)
+            m_height = value
     }
-
-    /**
-     * Replace your React Native view with a custom fragment
-     */
-    fun createFragment(root: FrameLayout, reactNativeViewId: Int) {
-        val parentView: ViewGroup = root.findViewById<View>(reactNativeViewId) as ViewGroup
-        setupLayout(parentView)
-        m_fragment = ATestFragment()
-        val activity: FragmentActivity = m_reactContext.currentActivity as FragmentActivity
-        activity.supportFragmentManager
-            .beginTransaction()
-            .replace(reactNativeViewId, m_fragment, reactNativeViewId.toString())
-            .commit()
-    }
-
-    fun setupLayout(view: View) {
-        Choreographer.getInstance().postFrameCallback(object : Choreographer.FrameCallback {
-            override fun doFrame(frameTimeNanos: Long) {
-                manuallyLayoutChildren(view)
-                view.viewTreeObserver.dispatchOnGlobalLayout()
-                Choreographer.getInstance().postFrameCallback(this)
-            }
-        })
-    }
-
-    /**
-     * Layout all children properly
-     */
-    fun manuallyLayoutChildren(view: View) {
-        // propWidth and propHeight coming from react-native props
-        val width = propWidth
-        val height = propHeight
-        view.measure(
-            View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-            View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
-        )
-        view.layout(0, 0, width, height)
-    }
-
 }
