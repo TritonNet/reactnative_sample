@@ -20,7 +20,7 @@ var React = require("react");
 var react_native_1 = require("react-native");
 var AReactIdentityViewManager = react_native_1.requireNativeComponent('AReactIdentityViewManager');
 var RNBiometricProvider = /** @class */ (function (_super) {
-    __extends(RNBiometricProvider, _super); //<IRNBiometricProviderProps, IRNBiometricProviderState> //implements IRNBiometricProvider
+    __extends(RNBiometricProvider, _super);
     function RNBiometricProvider(props) {
         var _this = _super.call(this, props) || this;
         _this.props = props;
@@ -38,8 +38,7 @@ var RNBiometricProvider = /** @class */ (function (_super) {
             } }));
     };
     return RNBiometricProvider;
-}(React.Component //<IRNBiometricProviderProps, IRNBiometricProviderState> //implements IRNBiometricProvider
-));
+}(React.Component));
 exports.RNBiometricProvider = RNBiometricProvider;
 ;
 //# sourceMappingURL=RNBiometricProvider.js.map

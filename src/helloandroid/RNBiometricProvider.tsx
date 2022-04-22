@@ -32,7 +32,9 @@ export interface IBiometricProviderConfig
     StatusUpdateCallback: IBiometricPreviewStatusSink
 }
 
-export class RNBiometricProvider extends React.Component//<IRNBiometricProviderProps, IRNBiometricProviderState> //implements IRNBiometricProvider
+export class RNBiometricProvider
+    extends React.Component<IRNBiometricProviderProps, IRNBiometricProviderState>
+    implements IRNBiometricProvider
 {
     ProviderView: any
     props: IRNBiometricProviderProps;
