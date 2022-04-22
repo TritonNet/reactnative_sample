@@ -42,7 +42,7 @@ class AReactIdentityViewManager constructor(): SimpleViewManager<CustomView>() {
     {
         Log.d(TAG, "receiveCommand")
         when (commandId) {
-            "update" -> m_view.UpdateText()
+            "update" -> m_view.UpdateText(args!!.getString(0))
         }
     }
 

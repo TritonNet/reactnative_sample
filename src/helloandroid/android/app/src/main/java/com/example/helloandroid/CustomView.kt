@@ -10,9 +10,9 @@ class CustomView(@NonNull context: Context?) : FrameLayout(context!!)
 {
     lateinit var m_textView: TextView;
 
-    fun UpdateText()
+    fun UpdateText(text: String)
     {
-        m_textView.text = "Text updated via RN";
+        m_textView.text = text;
     }
 
     init {

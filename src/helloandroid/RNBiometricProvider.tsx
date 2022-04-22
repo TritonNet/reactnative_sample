@@ -54,7 +54,7 @@ export class RNBiometricProvider
         UIManager.dispatchViewManagerCommand(
             viewId,
             "update",
-            [viewId]
+            ["Simple string from RN working"]
         );
     }
 

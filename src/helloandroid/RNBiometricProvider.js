@@ -29,7 +29,7 @@ var RNBiometricProvider = /** @class */ (function (_super) {
     RNBiometricProvider.prototype.initialize = function (config) {
         console.log("IBiometricProviderConfig::License = " + config.License);
         var viewId = react_native_1.findNodeHandle(this.ProviderView);
-        react_native_1.UIManager.dispatchViewManagerCommand(viewId, "update", [viewId]);
+        react_native_1.UIManager.dispatchViewManagerCommand(viewId, "update", ["Simple string from RN working"]);
     };
     RNBiometricProvider.prototype.render = function () {
         var _this = this;
