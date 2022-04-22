@@ -23,6 +23,9 @@ var RNBiometricProvider = /** @class */ (function (_super) {
     __extends(RNBiometricProvider, _super);
     function RNBiometricProvider(props) {
         var _this = _super.call(this, props) || this;
+        _this.onItemSelected = function (event) {
+            console.log(event.nativeEvent);
+        };
         _this.props = props;
         return _this;
     }
@@ -33,7 +36,7 @@ var RNBiometricProvider = /** @class */ (function (_super) {
     };
     RNBiometricProvider.prototype.render = function () {
         var _this = this;
-        return (React.createElement(AReactIdentityViewManager, { style: this.props.style, ref: function (component) {
+        return (React.createElement(AReactIdentityViewManager, { onChange: this.onItemSelected, style: this.props.style, ref: function (component) {
                 _this.ProviderView = component;
             } }));
     };

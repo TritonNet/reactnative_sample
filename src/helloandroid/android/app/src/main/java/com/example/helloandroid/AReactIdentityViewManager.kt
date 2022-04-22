@@ -3,8 +3,10 @@ package com.example.helloandroid
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
-import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.Callback
+import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactPropGroup
@@ -54,5 +56,30 @@ class AReactIdentityViewManager constructor(): SimpleViewManager<CustomView>() {
             m_width = value
         else if (index == 1)
             m_height = value
+    }
+
+    override fun getExportedCustomBubblingEventTypeConstants(): Map<String?, Any?>? {
+        return MapBuilder.builder<String?, Any?>()
+            .put(
+                "topChange",
+                MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onChange"))
+            )
+            .build();
+    }
+
+    @ReactMethod
+    fun createTestEvent(callback: Callback)
+    {
+        Log.d(TAG, "createCalendarEvent")
+    }
+
+    @ReactMethod
+    fun addListener(type: String?) {
+        Log.d(TAG, "addListener")
+    }
+
+    @ReactMethod
+    fun removeListeners(type: String?) {
+        Log.d(TAG, "removeListeners")
     }
 }
