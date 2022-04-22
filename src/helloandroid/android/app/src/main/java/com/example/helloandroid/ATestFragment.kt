@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
 class ATestFragment : Fragment() {
-    var customView: CustomView? = null
+    lateinit var m_customView: CustomView;
 
     override fun onCreateView(inflater: LayoutInflater,  parent: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater!!, parent, savedInstanceState)
-        customView = CustomView(this.context)
-        return customView // this CustomView could be any view that you want to render
+        m_customView = CustomView(this.context)
+        return m_customView // this CustomView could be any view that you want to render
+    }
+
+    fun UpdateText()
+    {
+        m_customView.UpdateText()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

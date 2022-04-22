@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RNIdentityViewManager } from './AReactIdentityViewManager';
+import { RNIdentityViewManager, IBiometricProviderConfig } from './AReactIdentityViewManager';
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
@@ -22,15 +22,20 @@ const LoginScreen = ({ navigation }) => {
 const VerifyScreen = ({ navigation, route }) => {
     const ref = useRef(null);
 
+    const config: IBiometricProviderConfig = {
+        License: "License String",
+        /* Other configuration parameters */
+    };
+    
     useEffect(() => {
-        ref.current.initialize();
+        ref.current.initialize(config);
     }, []);
 
     return (
         <View style={styles.container}>
             <View style={styles.title_view}>        
                 <Text style={styles.subtitle}>Verify your identity</Text>
-                <RNIdentityViewManager ref={ref} />
+                <RNIdentityViewManager ref={ref} style={styles.identityView} />
             </View>
         </View>
     );
