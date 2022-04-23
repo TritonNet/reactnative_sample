@@ -2,8 +2,7 @@ import * as React from 'react';
 import { requireNativeComponent, StyleSheet, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { interpolate } from 'react-native-reanimated';
 import { NativeEventEmitter, NativeModules } from 'react-native';
-import { IRNBiometricProvider } from './IRNBiometricProvider'
-import { IRNBiometricProviderConfig } from './IRNBiometricProviderConfig'
+import { IRNBiometricProvider, IRNBiometricProviderConfig } from './IRNBiometricProvider'
 
 const AReactIdentityViewManager = requireNativeComponent('AReactIdentityViewManager');
 

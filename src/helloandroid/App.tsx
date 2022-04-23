@@ -3,9 +3,7 @@ import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RNBiometricProvider } from './RNBiometricProvider';
-import { IRNBiometricProviderConfig } from './IRNBiometricProviderConfig'
-import { IRNBiometricProvider } from './IRNBiometricProvider'
-import { IRNICAOConfigurationParams } from './IRNICAOConfigurationParams'
+import { IRNBiometricProvider, IRNICAOConfigurationParams, IRNBiometricProviderConfig } from './IRNBiometricProvider'
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
