@@ -348,3 +348,21 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/src/helloandroid/ICAOConfigurationParams.js.map
+/src/helloandroid/IBiometricPreviewStatusSink.js
+/src/helloandroid/IBiometricPreviewStatusSink.js.map
+/src/helloandroid/IBiometricProviderConfig.js
+/src/helloandroid/IBiometricProviderConfig.js.map
+/src/helloandroid/ICAOConfigurationParams.js
+/src/helloandroid/IRNBiometricProviderConfig.js.map
+/src/helloandroid/IRNCAOConfigurationParams.js
+/src/helloandroid/IRNCAOConfigurationParams.js.map
+/src/helloandroid/IRNICAOConfigurationParams.js
+/src/helloandroid/IRNICAOConfigurationParams.js.map
+/src/helloandroid/IRNBiometricPreviewStatusSink.js
+/src/helloandroid/IRNBiometricPreviewStatusSink.js.map
+/src/helloandroid/IRNBiometricProvider.js
+/src/helloandroid/IRNBiometricProvider.js.map
+/src/helloandroid/IRNBiometricProviderConfig.js
+/src/helloandroid/RNBiometricProvider.js
+/src/helloandroid/RNBiometricProvider.js.map
