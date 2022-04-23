@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RNBiometricProvider } from './RNBiometricProvider';
-import { IRNBiometricProvider, IRNICAOConfigurationParams, IRNBiometricProviderConfig } from './IRNBiometricProvider'
+import { IRNBiometricProvider, IRNICAOConfigurationParams, IRNBiometricProviderConfig, DEFAULT_ICAO_PARAMS } from './IRNBiometricProvider'
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
@@ -24,13 +24,12 @@ const VerifyScreen = ({ navigation, route }) =>
 {
     var biometricProvider: IRNBiometricProvider;
 
-    const icaoParams: IRNICAOConfigurationParams = {
-        TestParam : "Test X"
-    };
+    const icaoParams: IRNICAOConfigurationParams = DEFAULT_ICAO_PARAMS;
+    
 
     const config: IRNBiometricProviderConfig = {
         License: "License String",
-        ICAOParams: undefined,
+        ICAOParams: icaoParams,
         StatusUpdateCallback: undefined
     };
     

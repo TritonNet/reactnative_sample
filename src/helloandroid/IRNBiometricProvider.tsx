@@ -354,6 +354,7 @@ export interface IRNBiometricPreviewStatusSink
     OnCompleted(result: IRNBiometricVerificationCompletionResult);
 }
 
+/** Default ICAO attributes */
 export const DEFAULT_ICAO_PARAMS: IRNICAOConfigurationParams =
 {
     SHARPNESS_LOOSE_MIN: -5203,
@@ -561,21 +562,28 @@ export interface IRNBiometricProviderConfig {
     StatusUpdateCallback: IRNBiometricPreviewStatusSink,
 }
 
-
+/** Biometric Provider interface */
 export interface IRNBiometricProvider
 {
     /** Initialize
      * This method initialises the class instance and its underlying components (i.e., Camera access).
      * Unsuccessful initialisation should result in an exception.
     */
-    initialize(config: IRNBiometricProviderConfig),
+    initialize(config: IRNBiometricProviderConfig): void,
 
-    /**
-     * This method begins the face biometric capture process.
+    /** StartFaceDetection
+     * This method begins the face biometric capture and verification process.
      * The face capturing would stop automatically once an image captured passes all the verifications successfully.
      */
-    startFaceDetection(),
+    startFaceDetection(): void,
 
-    /** */
-    stopFaceDetection()
+    /** StopFaceDetect()
+     * This method allows the calling code to terminate the verification session pre-maturely.
+     * This will also pause the camera preview and suspend the currently active verification session.
+     * Calling StartFaceDetect() again would re-launch a new verification session.
+     */
+    stopFaceDetection(): void,
+
+    /** Check if there is any verification process currently active. */
+    isFaceDetectionInProgress(): boolean
 }
