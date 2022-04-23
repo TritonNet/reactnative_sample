@@ -23,7 +23,7 @@ class CustomView(@NonNull context: Context?) : FrameLayout(context!!)
     {
         m_textView.text = text;
     }
-    
+
     init {
         // set padding and background color
         setPadding(16, 16, 16, 16)

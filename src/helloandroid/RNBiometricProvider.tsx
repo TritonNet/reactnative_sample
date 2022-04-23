@@ -2,13 +2,10 @@ import * as React from 'react';
 import { requireNativeComponent, StyleSheet, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { interpolate } from 'react-native-reanimated';
 import { NativeEventEmitter, NativeModules } from 'react-native';
+import { IRNBiometricProvider } from './IRNBiometricProvider'
+import { IRNBiometricProviderConfig } from './IRNBiometricProviderConfig'
 
 const AReactIdentityViewManager = requireNativeComponent('AReactIdentityViewManager');
-
-export interface IRNBiometricProvider
-{
-    initialize(config: IBiometricProviderConfig)
-}
 
 export interface IRNBiometricProviderProps
 {
@@ -17,21 +14,6 @@ export interface IRNBiometricProviderProps
 
 export interface IRNBiometricProviderState
 { }
-
-export interface ICAOConfigurationParams
-{  }
-
-export interface IBiometricPreviewStatusSink
-{
-    OnCompleted(biometricData);
-}
-
-export interface IBiometricProviderConfig
-{
-    License: String,
-    ICAOParams: ICAOConfigurationParams,
-    StatusUpdateCallback: IBiometricPreviewStatusSink
-}
 
 export class RNBiometricProvider
     extends React.Component<IRNBiometricProviderProps, IRNBiometricProviderState>
@@ -51,7 +33,7 @@ export class RNBiometricProvider
         console.log(event.nativeEvent);
     };
 
-    initialize(config: IBiometricProviderConfig)
+    initialize(config: IRNBiometricProviderConfig)
     {
         console.log("IBiometricProviderConfig::License = " + config.License)
         

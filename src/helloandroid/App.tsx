@@ -2,7 +2,10 @@ import React, { useEffect, useRef, Component } from 'react';
 import { View, StyleSheet, TextInput, Button, Text, PixelRatio, findNodeHandle, UIManager, Dimensions } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RNBiometricProvider, IBiometricProviderConfig, IRNBiometricProvider } from './RNBiometricProvider';
+import { RNBiometricProvider } from './RNBiometricProvider';
+import { IRNBiometricProviderConfig } from './IRNBiometricProviderConfig'
+import { IRNBiometricProvider } from './IRNBiometricProvider'
+import { IRNICAOConfigurationParams } from './IRNICAOConfigurationParams'
 
 const LoginScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("Email address");
@@ -14,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <View style={styles.button_view}>
         <TextInput style={styles.input} onChangeText={onChangeText} value={text} />
-        <Button title="Verify" onPress={() => navigation.navigate('Verify', { name: 'Jane' })}/>
+        <Button title="Verify" onPress={() => navigation.navigate('Verify')}/>
       </View>
     </View>
   );
@@ -23,7 +26,11 @@ const VerifyScreen = ({ navigation, route }) =>
 {
     var biometricProvider: IRNBiometricProvider;
 
-    const config: IBiometricProviderConfig = {
+    const icaoParams: IRNICAOConfigurationParams = {
+        TestParam : "Test X"
+    };
+
+    const config: IRNBiometricProviderConfig = {
         License: "License String",
         ICAOParams: undefined,
         StatusUpdateCallback: undefined
